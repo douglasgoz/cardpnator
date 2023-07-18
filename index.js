@@ -21,7 +21,13 @@ class StockDomain extends MenuDomain {
         if (!StockConfiguration.stockIsEnabled)
             return true;
 
+        if (this.stockQuantity === null)
+            return true;
+
         if (StockConfiguration.shouldPauseWhenStockIs && this.stockQuantity <= StockConfiguration.pauseStockAt)
+            return false;
+        
+        if (this.stockQuantity === 0)
             return false;
 
         return true;
